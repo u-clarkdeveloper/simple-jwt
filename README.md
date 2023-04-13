@@ -1,7 +1,5 @@
 # Simple JWT
-
-[![PyPI - Version](https://img.shields.io/pypi/v/simple-jwt.svg)](https://pypi.org/project/simple-jwt-decode/)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/simple-jwt.svg)](https://pypi.org/project/simple-jwt-decode/)
+[![PyPI version](https://badge.fury.io/py/simple-jwt-decode.svg)](https://badge.fury.io/py/simple-jwt-decode)
 
 -----
 

@@ -27,9 +27,9 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Documentation = "https://github.com/unknown/simple-jwt#readme"
-Issues = "https://github.com/unknown/simple-jwt/issues"
-Source = "https://github.com/unknown/simple-jwt"
+Documentation = "https://github.com/u-clarkdeveloper/simple-jwt#readme"
+Issues = "https://github.com/u-clarkdeveloper/simple-jwt/issues"
+Source = "https://github.com/u-clarkdeveloper/simple-jwt"
 
 [tool.hatch.version]
 path = "src/simple_jwt/__about__.py"
@@ -41,10 +41,10 @@ dependencies = [
 ]
 [tool.hatch.envs.default.scripts]
 test = "pytest -vv {args:tests}"
-test-cov = "coverage run -m pytest --vv {args:tests}"
+test-cov = "coverage run -m pytest {args:tests}"
 cov-report = [
   "- coverage combine",
-  "coverage report",
+  "coverage report -m",
 ]
 cov = [
   "test-cov",

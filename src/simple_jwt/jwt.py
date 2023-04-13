@@ -13,6 +13,8 @@ def decode(token: str | bytes) -> dict:
     """
     if isinstance(token, bytes):
         token = token.decode()
+    if not isinstance(token, str):
+        raise TypeError("Invalid token: token must be a string or bytes")
 
     try:
         headers, claims, signature = token.split(".")
@@ -25,11 +27,11 @@ def decode(token: str | bytes) -> dict:
     except base64.binascii.Error:
         raise base64.binascii.Error("Invalid token: token must be base64 encoded")
     
-    try:
-        header_data = json.loads(header_decoded)
-        claims_data = json.loads(claims_decoded)
-    except Exception as e:
-        raise e("Invalid token: token must be json encoded")
+    # try:
+    header_data = json.loads(header_decoded)
+    claims_data = json.loads(claims_decoded)
+    # except json.JSONDecodeError:
+        # print("Invalid token: token must be json encoded")
 
     return {"headers": header_data, "claims": claims_data, "signature": signature}
 

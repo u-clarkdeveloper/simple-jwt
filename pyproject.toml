@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "simple-jwt"
+name = "simple-jwt-decode"
 dynamic = ["version"]
 description = ''
 readme = "README.md"

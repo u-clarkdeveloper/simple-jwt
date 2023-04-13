@@ -22,7 +22,7 @@ I created this package because I found that I often needed to see the cliams of 
 ## Installation
 
 ```console
-pip install simple-jwt
+pip install simple-jwt-decode
 ```
 
 ## Usage

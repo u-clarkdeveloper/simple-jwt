@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "simple-jwt-decode"
 dynamic = ["version"]
-description = ''
+description = 'Simple Python Package for decoding JWT claims and checking if its expired. No verification of signatures.'
 readme = "README.md"
 requires-python = ">=3.7"
 license = "MIT"

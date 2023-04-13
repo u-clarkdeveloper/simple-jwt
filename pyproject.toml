@@ -31,6 +31,9 @@ Documentation = "https://github.com/u-clarkdeveloper/simple-jwt#readme"
 Issues = "https://github.com/u-clarkdeveloper/simple-jwt/issues"
 Source = "https://github.com/u-clarkdeveloper/simple-jwt"
 
+[tool.hatch.build.targets.wheel]
+packages = ["src/simple_jwt"]
+
 [tool.hatch.version]
 path = "src/simple_jwt/__about__.py"
 

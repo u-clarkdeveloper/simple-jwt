@@ -1,6 +1,10 @@
+from __future__ import annotations
+
 import base64
+import binascii
 import json
 from time import time
+
 
 def decode(token: str | bytes) -> dict:
     """Decode a JWT token.
@@ -14,26 +18,31 @@ def decode(token: str | bytes) -> dict:
     if isinstance(token, bytes):
         token = token.decode()
     if not isinstance(token, str):
-        raise TypeError("Invalid token: token must be a string or bytes")
+        raise TypeError('Invalid token: token must be a string or bytes')
 
     try:
-        headers, claims, signature = token.split(".")
+        headers, claims, signature = token.split('.')
     except ValueError:
-        raise ValueError("Invalid token: token must have 3 parts separated by '.'")
-    
+        raise ValueError(
+            "Invalid token: token must have 3 parts separated by '.'",
+        )
+
     try:
         header_decoded = base64.b64decode(headers)
         claims_decoded = base64.b64decode(claims)
-    except base64.binascii.Error:
-        raise base64.binascii.Error("Invalid token: token must be base64 encoded")
-    
+    except binascii.Error:
+        raise binascii.Error(
+            'Invalid token: token must be base64 encoded',
+        )
+
     # try:
     header_data = json.loads(header_decoded)
     claims_data = json.loads(claims_decoded)
     # except json.JSONDecodeError:
-        # print("Invalid token: token must be json encoded")
+    # print("Invalid token: token must be json encoded")
 
-    return {"headers": header_data, "claims": claims_data, "signature": signature}
+    return {'headers': header_data, 'claims': claims_data, 'signature': signature}
+
 
 def is_expired(token: str | bytes) -> bool:
     """Check if a JWT token is expired.
@@ -45,4 +54,4 @@ def is_expired(token: str | bytes) -> bool:
         bool: True if the token is expired, False otherwise.
     """
     decoded = decode(token)
-    return decoded["claims"]["exp"] < time()
+    return decoded['claims']['exp'] < time()

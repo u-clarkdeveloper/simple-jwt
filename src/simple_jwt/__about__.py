@@ -1,4 +1,5 @@
 # SPDX-FileCopyrightText: 2023-present Jesse Clark <jesse.clark@davenportiowa.com>
 #
 # SPDX-License-Identifier: MIT
-__version__ = "0.6.0"
+from __future__ import annotations
+__version__ = '0.7.0'

@@ -78,3 +78,4 @@ poetry.toml
 .ruff_cache/
 pyrightconfig.json
 .python-version
+.pypirc

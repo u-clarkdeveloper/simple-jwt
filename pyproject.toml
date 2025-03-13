@@ -26,6 +26,9 @@ classifiers = [
 ]
 dependencies = []
 
+[project.scripts]
+jwt = "simple_jwt.cli:main"
+
 [project.urls]
 Documentation = "https://github.com/u-clarkdeveloper/simple-jwt#readme"
 Issues = "https://github.com/u-clarkdeveloper/simple-jwt/issues"

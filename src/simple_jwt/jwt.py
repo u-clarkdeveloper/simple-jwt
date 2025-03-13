@@ -27,12 +27,17 @@ def decode(token: str | bytes) -> dict:
             "Invalid token: token must have 3 parts separated by '.'",
         )
 
+    # Add padding to make the base64 string length a multiple of 4
+    def add_padding(s):
+        return s + '=' * (4 - len(s) % 4) if len(s) % 4 else s
+
     try:
-        header_decoded = base64.b64decode(headers)
-        claims_decoded = base64.b64decode(claims)
+        # Use urlsafe_b64decode instead of b64decode for JWT tokens
+        header_decoded = base64.urlsafe_b64decode(add_padding(headers))
+        claims_decoded = base64.urlsafe_b64decode(add_padding(claims))
     except binascii.Error:
         raise binascii.Error(
-            'Invalid token: token must be base64 encoded',
+            'Invalid token: token must be base64url encoded',
         )
 
     # try:

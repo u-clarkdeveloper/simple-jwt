@@ -15,6 +15,7 @@ I created this package because I found that I often needed to see the cliams of 
   - [Usage](#usage)
     - [Decode](#decode)
     - [Expired](#expired)
+    - [CLI Usage](#cli-usage)
   - [License](#license)
 
 ## Installation
@@ -47,6 +48,25 @@ if (expired):
     print('Your JWT token is expired! Oh no! Better get a new one')
 else:
     print('Your JWT token is not expired; No need to refesh at the moment')
+```
+
+### CLI Usage
+
+You can also use the command-line interface to decode JWT tokens:
+
+```console
+jwt <token>
+```
+
+This will display the decoded token headers, claims, and signature, as well as whether the token is expired.
+
+Options:
+- `--check-expiry` or `-e`: Only check if the token is expired
+- `--raw` or `-r`: Print raw decoded data without formatting
+
+Example:
+```console
+jwt <token>
 ```
 
 ## License

@@ -11,6 +11,7 @@ from simple_jwt import jwt
 param = 'eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2ODEzMzcyNTYsImlhdCI6MTY4MTMzMzY1Niwic2lkIjoiMTUzMDcxNjQyNzYiLCJhaWQiOiI4NjUyNTk4MDg1IiwiY2lkIjoiNTA0MzA3MDIiLCJ0eXBlIjoiciJ9.jmFoOydgYnL8AqmgnLSFU2l_E6q3pnPHh7ss-g7xKO7tLD_JY8vZR3O-cthNInFzi9G2M3t2boRzMTatlbsZ7Q'
 
 
+
 @pytest.fixture
 def token() -> str:
     return 'eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2ODEzMzcyNTYsImlhdCI6MTY4MTMzMzY1Niwic2lkIjoiMTUzMDcxNjQyNzYiLCJhaWQiOiI4NjUyNTk4MDg1IiwiY2lkIjoiNTA0MzA3MDIiLCJ0eXBlIjoiciJ9.jmFoOydgYnL8AqmgnLSFU2l_E6q3pnPHh7ss-g7xKO7tLD_JY8vZR3O-cthNInFzi9G2M3t2boRzMTatlbsZ7Q'
@@ -23,7 +24,8 @@ def too_many_segments() -> str:
 
 @pytest.fixture
 def invalid_base64() -> str:
-    return 'eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2ODEzMzcyNTYsImlhdCI6MTY4MTMzMzY1Niwic2lkIjoiMTUzMDcxNjQyNzYiLCJhaWQiOiI4NjUyNTk4MDg1IiwiY2lkIjoiNTA0MzA3MDIiLCJ0eXBlIjoiciJ.jmFoOydgYnL8AqmgnLSFU2l_E6q3pnPHh7ss-g7xKO7tLD_JY8vZR3O-cthNInFzi9G2M3t2boRzMTatlbsZ7Q'
+    # This is truly invalid base64 - missing padding and contains characters that aren't valid in base64url encoding
+    return 'eyJhbGciOiJIUzUxMiJ9.!@#$%^&*()_+.jmFoOydgYnL8AqmgnLSFU2l_E6q3pnPHh7ss-g7xKO7tLD_JY8vZR3O-cthNInFzi9G2M3t2boRzMTatlbsZ7Q'
 
 
 @pytest.fixture
@@ -95,6 +97,18 @@ def test_expired_token(token: str):
 
 def test_not_expired_token(active_token: str):
     assert not jwt.is_expired(active_token)
+
+
+def test_decode_param():
+    decoded = jwt.decode(param)
+    assert decoded['headers']['alg'] == 'HS512'
+    assert decoded['claims']['exp'] == 1681337256
+    assert decoded['claims']['iat'] == 1681333656
+    assert decoded['claims']['sid'] == '15307164276'
+    assert decoded['claims']['aid'] == '8652598085'
+    assert decoded['claims']['cid'] == '50430702'
+    assert decoded['claims']['type'] == 'r'
+    assert decoded['signature'] == 'jmFoOydgYnL8AqmgnLSFU2l_E6q3pnPHh7ss-g7xKO7tLD_JY8vZR3O-cthNInFzi9G2M3t2boRzMTatlbsZ7Q'
 
 
 class does_not_raise:
